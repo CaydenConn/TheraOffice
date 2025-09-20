@@ -1,0 +1,85 @@
+﻿using Library.TheraOffice.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Library.TheraOffice.Services
+{
+    public class PhysicianServiceProxy
+    {
+        private Dictionary<int, Physician> physicians;
+        private PhysicianServiceProxy()
+        {
+            physicians = new Dictionary<int, Physician>();
+        }
+
+        private static PhysicianServiceProxy? instance;
+        private static object instanceLock = new object();
+
+        public static PhysicianServiceProxy Current
+        { 
+            get
+            {
+                lock(instanceLock)
+                {
+                    if(instance == null)
+                    {
+                        instance = new PhysicianServiceProxy();
+                    }
+                }
+                return instance;
+            } 
+        }
+        public Dictionary<int, Physician> Physicians { get { return physicians; } }
+
+        public Physician? CreatePhysician(Physician physician)
+        {
+            if (physician == null) { return null; }
+            if (physician.Id <= 0)
+            {
+                var maxId = -1;
+                if (physicians.Any())
+                {
+                    maxId = physicians.Keys.Max();
+                }
+                else
+                {
+                    maxId = 0;
+                }
+                maxId += 1;
+                physician.Id = maxId;
+            }
+
+            if (physicians.ContainsKey(physician.Id))
+            {
+                physicians[physician.Id] = physician;
+            }
+            else
+            {
+                physicians.Add(physician.Id, physician);
+            }
+            return physician;
+        }
+
+        public Physician? DeletePhysician(int id)
+        {
+            if (!physicians.ContainsKey(id)) { return null; }
+            var deletedPhysician = physicians[id];
+            physicians.Remove(id);
+            var appointmentsToDelete = AppointmentServiceProxy.Current.Appointments.Values.
+                                                    Where(appt => appt.PhysicianId == id).
+                                                    Select(appt => appt.Id).
+                                                    ToList();
+
+            foreach (var apptId in appointmentsToDelete)
+            {
+                AppointmentServiceProxy.Current.Appointments.Remove(apptId);
+            }
+
+            return deletedPhysician;
+        }
+    }
+}

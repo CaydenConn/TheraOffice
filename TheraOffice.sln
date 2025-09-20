@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI.TheraOffice", "CLI.TheraOffice\CLI.TheraOffice.csproj", "{3E1C6C39-089C-4F87-9354-6AB8823494AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.TheraOffice", "Library.TheraOffice\Library.TheraOffice.csproj", "{DB300B8A-5991-4F1B-9E91-8EB94A82081B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E1C6C39-089C-4F87-9354-6AB8823494AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1C6C39-089C-4F87-9354-6AB8823494AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1C6C39-089C-4F87-9354-6AB8823494AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1C6C39-089C-4F87-9354-6AB8823494AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68C5EF42-DA68-48CB-94E9-C6C1A3C0ED0C}
+	EndGlobalSection
+EndGlobal
