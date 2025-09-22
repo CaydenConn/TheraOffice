@@ -37,7 +37,10 @@ namespace CLI.TheraOffice
                                     patient.Address = Console.ReadLine();
 
                                     Console.WriteLine("Birthday: ");
-                                    patient.Birthday = DateOnly.Parse(Console.ReadLine() ?? "1/1/0000");
+                                    if(DateOnly.TryParse(Console.ReadLine() ?? "1/1/0001", out DateOnly date))
+                                    {
+                                        patient.Birthday = date;
+                                    }
 
                                     Console.WriteLine("Race: ");
                                     patient.Race = Console.ReadLine();
@@ -56,7 +59,10 @@ namespace CLI.TheraOffice
                                     physician.LicenseNumber = Console.ReadLine();
 
                                     Console.WriteLine("Graduation Date: ");
-                                    physician.GraduationDate = DateOnly.Parse(Console.ReadLine() ?? "1/1/0000");
+                                    if (DateOnly.TryParse(Console.ReadLine() ?? "1/1/0001", out DateOnly gradDate))
+                                    {
+                                        physician.GraduationDate = gradDate;
+                                    }
 
                                     PhysicianServiceProxy.Current.CreatePhysician(physician);
                                     break;
@@ -73,9 +79,15 @@ namespace CLI.TheraOffice
                                     }
 
                                     Console.WriteLine("Start Time: ");
-                                    appt.StartTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0000");
+                                    if(DateTime.TryParse(Console.ReadLine() ?? "1/1/0001 12:00:00 AM", out DateTime startTime))
+                                    {
+                                        appt.StartTime = startTime;
+                                    }
                                     Console.WriteLine("End Time: ");
-                                    appt.EndTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0000");
+                                    if(DateTime.TryParse(Console.ReadLine() ?? "1/1/0001 12:00:00 AM", out DateTime endTime))
+                                    {
+                                        appt.EndTime = endTime;
+                                    }
 
                                     AppointmentServiceProxy.Current.CreateAppointment(appt);
                                     break;
@@ -123,7 +135,7 @@ namespace CLI.TheraOffice
                             {
                                 case "1":
                                     {
-                                        Console.WriteLine("Select Patient to Delete(Id): ");
+                                        Console.WriteLine("Select Patient to Update(Id): ");
                                         if (int.TryParse(Console.ReadLine() ?? "-1", out int patientId))
                                         {
                                             var patientToUpdate = PatientServiceProxy.Current.Patients.Values.
@@ -138,7 +150,10 @@ namespace CLI.TheraOffice
                                                 patientToUpdate.Address = Console.ReadLine();
 
                                                 Console.WriteLine("Birthday: ");
-                                                patientToUpdate.Birthday = DateTime.Parse(Console.ReadLine() ?? "1/1/0000");
+                                                if (DateOnly.TryParse(Console.ReadLine() ?? "1/1/0001", out DateOnly date))
+                                                {
+                                                    patientToUpdate.Birthday = date;
+                                                }
 
                                                 Console.WriteLine("Race: ");
                                                 patientToUpdate.Race = Console.ReadLine();
@@ -153,7 +168,7 @@ namespace CLI.TheraOffice
                                     }
                                 case "2":
                                     {
-                                        Console.WriteLine("Select Physician to Delete(Id): ");
+                                        Console.WriteLine("Select Physician to Update(Id): ");
                                         if (int.TryParse(Console.ReadLine() ?? "-1", out int physicianId))
                                         {
                                             var physicianToUpdate = PhysicianServiceProxy.Current.Physicians.Values.
@@ -168,7 +183,10 @@ namespace CLI.TheraOffice
                                                 physicianToUpdate.LicenseNumber = Console.ReadLine();
 
                                                 Console.WriteLine("Graduation Date: ");
-                                                physicianToUpdate.GraduationDate = DateTime.Parse(Console.ReadLine() ?? "1/1/0000");
+                                                if (DateOnly.TryParse(Console.ReadLine() ?? "1/1/0001", out DateOnly gradDate))
+                                                {
+                                                    physicianToUpdate.GraduationDate = gradDate;
+                                                }
 
                                                 PhysicianServiceProxy.Current.CreatePhysician(physicianToUpdate);
                                             }
@@ -177,7 +195,7 @@ namespace CLI.TheraOffice
                                     }
                                 case "3":
                                     {
-                                        Console.WriteLine("Select Appointment to Delete(Id): ");
+                                        Console.WriteLine("Select Appointment to Update(Id): ");
                                         if (int.TryParse(Console.ReadLine() ?? "-1", out int apptId))
                                         {
                                             var apptToUpdate = AppointmentServiceProxy.Current.Appointments.Values.
@@ -198,7 +216,9 @@ namespace CLI.TheraOffice
                                                 }
 
                                                 Console.WriteLine("Start Time: ");
-                                                apptToUpdate.StartTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0000");
+                                                apptToUpdate.StartTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0001");
+
+                                                Console.WriteLine("End Time: ");
                                                 apptToUpdate.EndTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0001");
 
                                                 AppointmentServiceProxy.Current.CreateAppointment(apptToUpdate);

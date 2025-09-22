@@ -39,6 +39,13 @@ namespace Library.TheraOffice.Services
         {
             if (patient == null) return null;
             // If the Id is not a valid Id find the next valid Id and set it
+
+            if(patient.Birthday == DateOnly.MinValue)
+            {
+                Console.WriteLine("Invalid Birth Date");
+                return null;
+            }
+
             if (patient.Id <= 0)
             {
                 var maxId = -1;

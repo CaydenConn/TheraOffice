@@ -38,6 +38,18 @@ namespace Library.TheraOffice.Services
         public Physician? CreatePhysician(Physician physician)
         {
             if (physician == null) { return null; }
+            
+            if(!int.TryParse(physician.LicenseNumber ?? "-1", out int number))
+            {
+                Console.WriteLine("Invalid License Number, Must Only Contain Digits (0 - 9)");
+                return null;
+            }
+
+            if(physician.GraduationDate == DateOnly.MinValue)
+            {
+                Console.WriteLine("Invalid Gradiation Date");
+                return null;
+            }
             if (physician.Id <= 0)
             {
                 var maxId = -1;

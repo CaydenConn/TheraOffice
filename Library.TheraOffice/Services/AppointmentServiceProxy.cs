@@ -39,6 +39,12 @@ namespace Library.TheraOffice.Services
             // Check if 'appt' parameter exists
             if (appt == null) return null;
 
+            if (appt.StartTime == DateTime.MinValue || appt.EndTime == DateTime.MinValue)
+            {
+                Console.WriteLine("Error With Appointment Date or Time");
+                return null;
+            }
+
             // Makes sure the appointment has a valid Id
             if (appt.Id <= 0)
             {
@@ -64,13 +70,6 @@ namespace Library.TheraOffice.Services
             if (!PhysicianServiceProxy.Current.Physicians.ContainsKey(appt.PhysicianId))
             {
                 Console.WriteLine($"Physician with Id: {appt.PhysicianId} does not exist");
-                return null;
-            }
-
-            // Checks to see if the Appointment already exists
-            if (appointments.ContainsKey(appt.Id) && appointments[appt.Id] == appt)
-            {
-                Console.WriteLine($"This Appointment already exists");
                 return null;
             }
 
