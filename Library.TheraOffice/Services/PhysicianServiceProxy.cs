@@ -39,7 +39,7 @@ namespace Library.TheraOffice.Services
         {
             if (physician == null) { return null; }
             
-            if(!int.TryParse(physician.LicenseNumber ?? "-1", out int number))
+            if(!long.TryParse(physician.LicenseNumber ?? "-1", out long number))
             {
                 Console.WriteLine("Invalid License Number, Must Only Contain Digits (0 - 9)");
                 return null;
