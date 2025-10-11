@@ -35,6 +35,19 @@ namespace Library.TheraOffice.Services
 
         public Dictionary<int, Patient> Patients { get { return patients; } }
 
+        public Patient? GetById(int id)
+        {
+            if (id <= 0)
+            {
+                return null;
+            }
+            if (patients.TryGetValue(id, out var patient))
+            {
+                return patient;
+            }
+            return null;
+        }
+        
         public Patient? CreatePatient(Patient patient)
         {
             if (patient == null) return null;

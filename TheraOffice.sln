@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI.TheraOffice", "CLI.TheraOffice\CLI.TheraOffice.csproj", "{3E1C6C39-089C-4F87-9354-6AB8823494AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.TheraOffice", "Library.TheraOffice\Library.TheraOffice.csproj", "{DB300B8A-5991-4F1B-9E91-8EB94A82081B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.TheraOffice", "Maui.TheraOffice\Maui.TheraOffice.csproj", "{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB300B8A-5991-4F1B-9E91-8EB94A82081B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F26C58-65B8-46D4-BC8E-D9F6823DC8A8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
