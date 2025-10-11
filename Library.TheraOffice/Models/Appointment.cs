@@ -11,13 +11,20 @@ namespace Library.TheraOffice.Models
     {
         public int Id { get; set; }
         public int PatientId { get; set; }
+        public Patient? Patient { get; set; }
         public int PhysicianId { get; set; }
+        public Physician? Physician { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
         public override string ToString()
         {
-            return $"{Id}. Patient: {PatientServiceProxy.Current.Patients[PatientId].Name}({PatientId}) Physician: {PhysicianServiceProxy.Current.Physicians[PhysicianId].Name}({PhysicianId})\n   Time: {StartTime} - {EndTime}";
+            if (Patient == null || Physician == null)
+            {
+                return $"{Id}. {StartTime}: {PatientId} with {PhysicianId} ends at {EndTime}";
+            }
+
+            return $"{Id}. {StartTime}: {Patient.Name}({Patient.Id}) with {Physician.Name}({Physician.Id}) ends at {EndTime}";
         }
     }
 }

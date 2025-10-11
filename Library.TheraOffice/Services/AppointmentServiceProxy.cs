@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Library.TheraOffice.Services
 {
     public class AppointmentServiceProxy
-    {   
+    {
         private Dictionary<int, Appointment> appointments;
         private AppointmentServiceProxy()
         {
@@ -33,7 +33,18 @@ namespace Library.TheraOffice.Services
             }
         }
         public Dictionary<int, Appointment> Appointments { get { return appointments; } }
-       
+        public Appointment? GetById(int id)
+        {
+            if (id <= 0)
+            {
+                return null;
+            }
+            if (appointments.TryGetValue(id, out var appt))
+            {
+                return appt;
+            }
+            return null;
+        }
         public Appointment? CreateAppointment(Appointment? appt)
         {
             // Check if 'appt' parameter exists
