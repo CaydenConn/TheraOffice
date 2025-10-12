@@ -7,7 +7,7 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            
+            <Button Text="Appointments" Clicked="AppointmentClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 
