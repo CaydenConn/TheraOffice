@@ -18,5 +18,12 @@ namespace Library.TheraOffice.Models
         {
             return $"{Id}. Name: {Name} - {LicenseNumber}\n   Graduation Date: {GraduationDate}\n   Specializations: {Specializations}";
         }
+        public string Display
+        {
+            get
+            {
+                return ToString();
+            }
+        }
     }
 }

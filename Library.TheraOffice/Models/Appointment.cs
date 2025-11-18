@@ -26,5 +26,12 @@ namespace Library.TheraOffice.Models
 
             return $"{Id}. {StartTime}: {Patient.Name}({Patient.Id}) with {Physician.Name}({Physician.Id}) ends at {EndTime}";
         }
+        public string Display
+        {
+            get
+            {
+                return ToString();
+            }
+        }
     }
 }

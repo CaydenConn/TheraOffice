@@ -48,7 +48,7 @@ namespace CLI.TheraOffice
                                     Console.WriteLine("Gender: ");
                                     patient.Gender = Console.ReadLine();
 
-                                    PatientServiceProxy.Current.CreatePatient(patient);
+                                    PatientServiceProxy.Current.AddOrUpdate(patient);
                                     break;
                                 case "2":
                                     var physician = new Physician();
@@ -161,7 +161,7 @@ namespace CLI.TheraOffice
                                                 Console.WriteLine("Gender: ");
                                                 patientToUpdate.Gender = Console.ReadLine(); Console.WriteLine("Name:");
 
-                                                PatientServiceProxy.Current.CreatePatient(patientToUpdate);
+                                                PatientServiceProxy.Current.AddOrUpdate(patientToUpdate);
                                             }
                                         }
                                             break;
@@ -242,7 +242,7 @@ namespace CLI.TheraOffice
                                     Console.WriteLine("Select Patient to Delete(Id): ");
                                     if (int.TryParse(Console.ReadLine() ?? "-1", out int patientId))
                                     {
-                                        PatientServiceProxy.Current.DeletePatient(patientId);
+                                        PatientServiceProxy.Current.Delete(patientId);
                                     }
                                     break;
                                 case "2":

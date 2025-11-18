@@ -48,15 +48,15 @@ namespace Library.TheraOffice.Services
             return null;
         }
         
-        public Patient? CreatePatient(Patient patient)
+        public Patient? AddOrUpdate(Patient? patient)
         {
             if (patient == null) return null;
             // If the Id is not a valid Id find the next valid Id and set it
 
-            if(patient.Birthday == DateOnly.MinValue)
+            if(patient.Birthday == DateTime.MinValue)
             {
-                Console.WriteLine("Invalid Birth Date");
-                return null;
+                //Console.WriteLine("Invalid Birth Date");
+                //return null;
             }
 
             if (patient.Id <= 0)
@@ -86,7 +86,7 @@ namespace Library.TheraOffice.Services
             return patient;
         }
 
-        public Patient? DeletePatient(int id)
+        public Patient? Delete(int id)
         {
             if (!patients.ContainsKey(id)) { return null; }
             var deletedPatient = patients[id];

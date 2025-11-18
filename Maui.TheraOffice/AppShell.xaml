@@ -14,8 +14,23 @@
         Route="MainPage" />
 
     <ShellContent
+    Title="Patients"
+    ContentTemplate="{DataTemplate views:PatientMainView}"
+    Route="PatientMainView" />
+
+    <ShellContent
+    Title="Physicians"
+    ContentTemplate="{DataTemplate views:PhysicianMainView}"
+    Route="PhysicianMainView" />
+    
+    <ShellContent
         Title="Appointments"
-        ContentTemplate="{DataTemplate views:AppointmentView}"
-        Route="Appointments" />
+        ContentTemplate="{DataTemplate views:AppointmentMainView}"
+        Route="AppointmentMainView" />
+
+    <ShellContent
+    Title="Patients"
+    ContentTemplate="{DataTemplate views:PatientView}"
+    Route="PatientView" />
 
 </Shell>
