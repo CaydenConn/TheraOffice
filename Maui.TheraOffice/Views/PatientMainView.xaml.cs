@@ -52,4 +52,9 @@ public partial class PatientMainView : ContentPage
     {
         (BindingContext as PatientMainViewModel)?.SortSearch();
     }
+
+    private void SortTypeClicked(object sender, EventArgs e)
+    {
+        (BindingContext as PatientMainViewModel)?.SortTypeChanged();
+    }
 }

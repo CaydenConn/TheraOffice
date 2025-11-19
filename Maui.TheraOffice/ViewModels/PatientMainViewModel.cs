@@ -15,9 +15,10 @@ namespace Maui.TheraOffice.ViewModels
         public PatientMainViewModel() {
             InlinePatient = new PatientViewModel();
             IsInlineCardVisible = false;
-            InlineCardVisibleText = '+';
-            SortSearchText = '▲';
+            InlineCardVisibleText = '▼';
+            SortSearchIcon = '▲';
             IsAscending = true;
+            SortSearchType = "Id";
         }
         public ObservableCollection<PatientViewModel?> Patients
         {
@@ -27,29 +28,63 @@ namespace Maui.TheraOffice.ViewModels
 
                 if (isAscending)
                 {
-                    return new ObservableCollection<PatientViewModel?>
-                    (PatientServiceProxy
-                    .Current
-                    .Patients
-                    .Values
-                    .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
-                          || (p?.Id == queryId))
-                    .OrderBy(p => p?.Id)
-                    .Select(p => new PatientViewModel(p))
-                    );
+                    if (SortSearchType == "Id")
+                    {
+                        return new ObservableCollection<PatientViewModel?>
+                        (PatientServiceProxy
+                        .Current
+                        .Patients
+                        .Values
+                        .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
+                              || (p?.Id == queryId))
+                        .OrderBy(p => p?.Id)
+                        .Select(p => new PatientViewModel(p))
+                        );
+                    }
+                    else
+                    {
+                        return new ObservableCollection<PatientViewModel?>
+                        (PatientServiceProxy
+                        .Current
+                        .Patients
+                        .Values
+                        .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
+                              || (p?.Id == queryId))
+                        .OrderBy(p => p?.Name)
+                        .Select(p => new PatientViewModel(p))
+                        );
+                    }
+                        
                 }
                 else
                 {
-                    return new ObservableCollection<PatientViewModel?>
-                    (PatientServiceProxy
-                    .Current
-                    .Patients
-                    .Values
-                    .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
-                          || (p?.Id == queryId))
-                    .OrderByDescending(p => p?.Id)
-                    .Select(p => new PatientViewModel(p))
-                    );
+                    if(SortSearchType == "Id")
+                    {
+                        return new ObservableCollection<PatientViewModel?>
+                        (PatientServiceProxy
+                        .Current
+                        .Patients
+                        .Values
+                        .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
+                                || (p?.Id == queryId))
+                        .OrderByDescending(p => p?.Id)
+                        .Select(p => new PatientViewModel(p))
+                        );
+                    }
+                    else
+                    {
+                        return new ObservableCollection<PatientViewModel?>
+                        (PatientServiceProxy
+                        .Current
+                        .Patients
+                        .Values
+                        .Where(p => (p?.Name?.ToUpper().Contains(Query?.ToUpper() ?? string.Empty) ?? false)
+                              || (p?.Id == queryId))
+                        .OrderByDescending(p => p?.Name)
+                        .Select(p => new PatientViewModel(p))
+                        );
+                    }
+                        
                 }
                 
             }
@@ -92,20 +127,37 @@ namespace Maui.TheraOffice.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        private char sortSearchText;
-        public char SortSearchText
+        private string sortSearchType;
+        public string SortSearchType
         {
             get
             {
-                return sortSearchText;
+                return sortSearchType;
             }
             set
             {
-                if (sortSearchText != value)
+                if (sortSearchType != value)
                 {
-                    sortSearchText = value;
+                    sortSearchType = value;
                 }
                 NotifyPropertyChanged();
+            }
+        }
+        private char sortSearchIcon;
+        public char SortSearchIcon
+        {
+            get
+            {
+                return sortSearchIcon;
+            }
+            set
+            {
+                if (sortSearchIcon != value)
+                {
+                    sortSearchIcon = value;
+                }
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Patients));
             }
         }
         private bool isAscending;
@@ -145,12 +197,16 @@ namespace Maui.TheraOffice.ViewModels
         public void ExpandCard()
         {
             IsInlineCardVisible = !IsInlineCardVisible;
-            InlineCardVisibleText = InlineCardVisibleText == '+' ? '-' : '+';
+            InlineCardVisibleText = InlineCardVisibleText == '▼' ? '-' : '▼';
         }
         public void SortSearch()
         {
             IsAscending = !IsAscending;
-            SortSearchText = IsAscending ? '▲' : '▼';
+            SortSearchIcon = IsAscending ? '▲' : '▼';
+        }
+        public void SortTypeChanged()
+        {
+            SortSearchType = SortSearchType == "Id" ? "Name" : "Id";
         }
         public void Refresh()
         {

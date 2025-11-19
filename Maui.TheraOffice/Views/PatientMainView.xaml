@@ -24,13 +24,15 @@
             <!-- SEARCH BAR -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.735*"/>
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Text="{Binding SortSearchText}" Clicked="SortSearchClicked"/>
-                <Entry Grid.Column="1" Text="{Binding Query}"/>
-                <Button Text="Search" Grid.Column="2" Clicked="SearchClicked"/>
+                <Button Grid.Column="0" Text="{Binding SortSearchType}" Clicked="SortTypeClicked"/>
+                <Button Grid.Column="1" Text="{Binding SortSearchIcon}" Clicked="SortSearchClicked"/>
+                <Entry Grid.Column="2" Text="{Binding Query}"/>
+                <Button Text="Search" Grid.Column="3" Clicked="SearchClicked"/>
             </Grid>
             <!-- PATIENT LIST -->
             <Grid Grid.Row="2">
