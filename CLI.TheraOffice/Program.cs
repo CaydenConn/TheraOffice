@@ -64,7 +64,7 @@ namespace CLI.TheraOffice
                                         physician.GraduationDate = gradDate;
                                     }
 
-                                    PhysicianServiceProxy.Current.CreatePhysician(physician);
+                                    PhysicianServiceProxy.Current.AddOrUpdate(physician);
                                     break;
                                 case "3":
                                     var appt = new Appointment();
@@ -188,7 +188,7 @@ namespace CLI.TheraOffice
                                                     physicianToUpdate.GraduationDate = gradDate;
                                                 }
 
-                                                PhysicianServiceProxy.Current.CreatePhysician(physicianToUpdate);
+                                                PhysicianServiceProxy.Current.AddOrUpdate(physicianToUpdate);
                                             }
                                         }
                                             break;
@@ -249,7 +249,7 @@ namespace CLI.TheraOffice
                                     Console.WriteLine("Select Physician to Delete(Id): ");
                                     if (int.TryParse(Console.ReadLine() ?? "-1", out int physicianId))
                                     {
-                                        PhysicianServiceProxy.Current.DeletePhysician(physicianId);
+                                        PhysicianServiceProxy.Current.Delete(physicianId);
                                     }
                                     break;
                                 case "3":
