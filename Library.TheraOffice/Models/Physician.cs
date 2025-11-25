@@ -10,13 +10,13 @@ namespace Library.TheraOffice.Models
     {
         public string? Name {  get; set; }
         public string? LicenseNumber { get; set; }
-        public DateOnly GraduationDate { get; set; }
-        public List<string?>? Specializations { get; set; }
+        public DateTime GraduationDate { get; set; } = DateTime.Today;
+        public string? Specialization { get; set; }
         public int Id { get; set; }
 
         public override string ToString()
         {
-            return $"{Id}. Name: {Name} - {LicenseNumber}\n   Graduation Date: {GraduationDate}\n   Specializations: {Specializations}";
+            return $"{Id}. Name: {Name} - {LicenseNumber} - {Specialization}";
         }
         public string Display
         {

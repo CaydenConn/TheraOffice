@@ -46,7 +46,7 @@ namespace Library.TheraOffice.Services
             }
             return null;
         }
-        public Physician? CreatePhysician(Physician physician)
+        public Physician? AddOrUpdate(Physician? physician)
         {
             if (physician == null) { return null; }
             
@@ -56,7 +56,7 @@ namespace Library.TheraOffice.Services
                 return null;
             }
 
-            if(physician.GraduationDate == DateOnly.MinValue)
+            if(physician.GraduationDate == DateTime.MinValue)
             {
                 Console.WriteLine("Invalid Gradiation Date");
                 return null;
@@ -87,7 +87,7 @@ namespace Library.TheraOffice.Services
             return physician;
         }
 
-        public Physician? DeletePhysician(int id)
+        public Physician? Delete(int id)
         {
             if (!physicians.ContainsKey(id)) { return null; }
             var deletedPhysician = physicians[id];

@@ -3,9 +3,124 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.TheraOffice.Views.PhysicianMainView"
              Title="PhysicianMainView"
+             NavigatedTo="ContentPage_NavigatedTo"
              >
     <VerticalStackLayout>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!-- HEADER -->
+            <Grid Grid.Row="0">
+                <Label
+        Text="Physicians"
+        Style="{StaticResource Headline}"
+        SemanticProperties.HeadingLevel="Level1"
+        />
+            </Grid>
+            <!-- SEARCH BAR -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.735*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="{Binding SortSearchType}" Clicked="SortTypeClicked"/>
+                <Button Grid.Column="1" Text="{Binding SortSearchIcon}" Clicked="SortSearchClicked"/>
+                <Entry Grid.Column="2" Text="{Binding Query}"/>
+                <Button Text="Search" Grid.Column="3" Clicked="SearchClicked"/>
+            </Grid>
+            <!-- Physician LIST -->
+            <Grid Grid.Row="2">
+                <ListView
+        ItemsSource="{Binding Physicians}"
+        SelectedItem="{Binding SelectedPhysician}"
+        HasUnevenRows="False"
+        >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Model.Display}" Background="{Binding DisplayBackgroundColor}"  Grid.Column="0"/>
+                                    <Grid Grid.Column="1" Background="{Binding DisplayBackgroundColor}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Text="Edit" Grid.Column="0" Command="{Binding EditCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Delete" Grid.Column="1" Clicked="InlineEditClicked" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
+                                    </Grid>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <!-- INLINE CARD -->
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Text="{Binding InlineCardVisibleText}" Clicked="ExpandCardClicked"/>
+                <Grid 
+            Grid.Row="1"
+            IsVisible="{Binding IsInlineCardVisible}"
+        >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Physician's Name" />
+                    <Entry Grid.Row="1" Text="{Binding InlinePhysician.Model.Name}"/>
+                    <Label Grid.Row="2" Text="Physician's License Number"/>
+                    <Entry Grid.Row="3" Text="{Binding InlinePhysician.Model.LicenseNumber}"/>
+                    <Label Grid.Row="4" Text="Physician's Specialization" />
+                    <Entry Grid.Row="5" Text="{Binding InlinePhysician.Model.Specialization}"/>
+                    <Label Grid.Row="6" Text="Physician's Date of Graduation"/>
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Grid.Column="0" Date="{Binding InlinePhysician.Model.GraduationDate}"/>
+                        <Button Grid.Column="1" Text="+" Clicked="InlineAddClicked"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!-- BUTTON BAR -->
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Add" Clicked="AddClicked" />
+                    <Button Grid.Column="1" Text="Edit" Clicked="EditClicked" />
+                    <Button Grid.Column="2" Text="Delete" Clicked="DeleteClicked" />
+                </Grid>
+            </Grid>
+        </Grid>
         <Button Text="Back to Menu" Clicked="BackClicked"/>
     </VerticalStackLayout>
 </ContentPage>
