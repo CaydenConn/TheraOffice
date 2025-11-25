@@ -142,6 +142,7 @@ namespace Maui.TheraOffice.ViewModels
                     sortSearchType = value;
                 }
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Physicians));
             }
         }
         private char sortSearchIcon;

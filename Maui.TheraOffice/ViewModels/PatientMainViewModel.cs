@@ -141,6 +141,7 @@ namespace Maui.TheraOffice.ViewModels
                     sortSearchType = value;
                 }
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Patients));
             }
         }
         private char sortSearchIcon;
