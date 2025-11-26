@@ -57,10 +57,12 @@ namespace Maui.TheraOffice.ViewModels
         public ICommand? DeleteCommand { get; set; }
         public ICommand? EditCommand { get; set; }
         public Physician? Model { get; set; }
+        private Color? displayBackgroundColor = default;
         public Color DisplayBackgroundColor
         {
             get
             {
+                if (displayBackgroundColor != default) { return displayBackgroundColor; }
                 if (Model == null) { return Colors.Transparent; }
 
                 switch (Model.Specialization)
@@ -75,6 +77,13 @@ namespace Maui.TheraOffice.ViewModels
                         return Colors.Transparent;
                 }
             
+            }
+            set
+            {
+                if (displayBackgroundColor != value)
+                {
+                    displayBackgroundColor = value;
+                }
             }
         }
     }

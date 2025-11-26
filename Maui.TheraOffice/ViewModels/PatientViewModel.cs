@@ -2,6 +2,7 @@
 using Library.TheraOffice.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -57,10 +58,13 @@ namespace Maui.TheraOffice.ViewModels
         public ICommand? DeleteCommand { get; set; }
         public ICommand? EditCommand { get; set; }
         public Patient? Model { get; set; }
+        private Color? displayBackgroundColor = default;
         public Color DisplayBackgroundColor
         {
             get
             {
+                if (displayBackgroundColor != default) { return displayBackgroundColor; }
+
                 if (Model == null) { return Colors.Transparent; }
 
                 int age = DateTime.Today.Year - Model.Birthday.Year;
@@ -70,6 +74,13 @@ namespace Maui.TheraOffice.ViewModels
                 }
 
                 return age < 18 ? Colors.LightBlue : Colors.LightGoldenrodYellow;
+            }
+            set
+            {
+                if (displayBackgroundColor != value)
+                {
+                    displayBackgroundColor = value;
+                }
             }
         }
     }

@@ -45,7 +45,7 @@ namespace Library.TheraOffice.Services
             }
             return null;
         }
-        public Appointment? CreateAppointment(Appointment? appt)
+        public Appointment? AddOrUpdate(Appointment? appt)
         {
             // Check if 'appt' parameter exists
             if (appt == null) return null;
@@ -73,35 +73,35 @@ namespace Library.TheraOffice.Services
             }
 
             // Checks to see if Patient and Physician in the Appointment Exists
-            if (!PatientServiceProxy.Current.Patients.ContainsKey(appt.PatientId))
-            {
-                Console.WriteLine($"Patient with Id: {appt.PatientId} does not exist");
-                return null;
-            }
-            if (!PhysicianServiceProxy.Current.Physicians.ContainsKey(appt.PhysicianId))
-            {
-                Console.WriteLine($"Physician with Id: {appt.PhysicianId} does not exist");
-                return null;
-            }
+            //if (!PatientServiceProxy.Current.Patients.ContainsKey(appt.PatientId))
+            //{
+            //    Console.WriteLine($"Patient with Id: {appt.PatientId} does not exist");
+            //    return null;
+            //}
+            //if (!PhysicianServiceProxy.Current.Physicians.ContainsKey(appt.PhysicianId))
+            //{
+            //    Console.WriteLine($"Physician with Id: {appt.PhysicianId} does not exist");
+            //    return null;
+            //}
 
             // Checks to see if the Date + Time fall within Business Hours
-            if (appt.StartTime.Hour < 8 || (appt.EndTime.Hour > 17 && appt.EndTime.Minute >= 0) || appt.StartTime >= appt.EndTime)
-            {
-                Console.WriteLine("Appointment must be within business hours: 8am - 5pm");
-                return null;
-            }
-            if (appt.StartTime.DayOfWeek == DayOfWeek.Saturday || appt.StartTime.DayOfWeek == DayOfWeek.Sunday)
-            {
-                Console.WriteLine("Appointment must be within business days: Monday - Friday");
-                return null;
-            }
+            //if (appt.StartTime.Hour < 8 || (appt.EndTime.Hour > 17 && appt.EndTime.Minute >= 0) || appt.StartTime >= appt.EndTime)
+            //{
+            //    Console.WriteLine("Appointment must be within business hours: 8am - 5pm");
+            //    return null;
+            //}
+            //if (appt.StartTime.DayOfWeek == DayOfWeek.Saturday || appt.StartTime.DayOfWeek == DayOfWeek.Sunday)
+            //{
+            //    Console.WriteLine("Appointment must be within business days: Monday - Friday");
+            //    return null;
+            //}
 
             // Checks if appointment spans multiple days
-            if (appt.StartTime.Date != appt.EndTime.Date)
-            {
-                Console.WriteLine("Cannot have an appointment spanning multiple days");
-                return null;
-            }
+            //if (appt.StartTime.Date != appt.EndTime.Date)
+            //{
+            //    Console.WriteLine("Cannot have an appointment spanning multiple days");
+            //    return null;
+            //}
 
             // Checks to see if there is already an appointment at that given Date + Time
             bool overlap = appointments.Values.Any(existing => existing.PhysicianId == appt.PhysicianId
@@ -125,7 +125,7 @@ namespace Library.TheraOffice.Services
             return appt;
         }
 
-        public Appointment? DeleteAppointment(int id)
+        public Appointment? Delete(int id)
         {
             // If the Appointment id does not exist return null
             if (!appointments.ContainsKey(id)) { return null; }

@@ -187,7 +187,7 @@ namespace Maui.TheraOffice.ViewModels
             PatientServiceProxy.Current.Delete(SelectedPatient?.Model?.Id ?? 0);
             Refresh();
         }
-        public void AddInlineBlog()
+        public void AddInlinePatient()
         {
             PatientServiceProxy.Current.AddOrUpdate(InlinePatient?.Model);
             NotifyPropertyChanged(nameof(Patients));
