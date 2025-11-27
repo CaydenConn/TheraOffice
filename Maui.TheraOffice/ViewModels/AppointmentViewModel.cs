@@ -8,9 +8,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Maui.TheraOffice.ViewModels
 {
@@ -161,6 +163,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPatient?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPatientId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Patient?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPatient != null && p?.Id == SelectedPatient?.Model?.Id ? 0 : 1))
                         .ThenBy(p => p?.Id)
                         .Select(p =>
@@ -182,6 +193,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPatient?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPatientId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Patient?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPatient != null && p?.Id == SelectedPatient?.Model?.Id ? 0 : 1))
                         .ThenBy(p => p?.Name)
                         .Select(p =>
@@ -207,6 +227,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPatient?.ToUpper() ?? string.Empty) ?? false)
                                 || (p?.Id == QueryPatientId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Patient?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPatient != null && p?.Id == SelectedPatient?.Model?.Id ? 0 : 1))
                         .ThenByDescending(p => p?.Id)
                         .Select(p =>
@@ -228,6 +257,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPatient?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPatientId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Patient?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPatient != null && p?.Id == SelectedPatient?.Model?.Id ? 0 : 1))
                         .ThenByDescending(p => p?.Name)
                         .Select(p =>
@@ -346,6 +384,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPhysician?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPhysicianId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Physician?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPhysician != null && p?.Id == SelectedPhysician?.Model?.Id ? 0 : 1))
                         .ThenBy(p => p?.Id)
                         .Select(p =>
@@ -367,6 +414,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPhysician?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPhysicianId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Physician?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPhysician != null && p?.Id == SelectedPhysician?.Model?.Id ? 0 : 1))
                         .ThenBy(p => p?.Name)
                         .Select(p =>
@@ -392,6 +448,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPhysician?.ToUpper() ?? string.Empty) ?? false)
                                 || (p?.Id == QueryPhysicianId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Physician?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPhysician != null && p?.Id == SelectedPhysician?.Model?.Id ? 0 : 1))
                         .ThenByDescending(p => p?.Id)
                         .Select(p =>
@@ -413,6 +478,15 @@ namespace Maui.TheraOffice.ViewModels
                         .Values
                         .Where(p => (p?.Name?.ToUpper().Contains(QueryPhysician?.ToUpper() ?? string.Empty) ?? false)
                               || (p?.Id == QueryPhysicianId))
+                        .Where(p =>
+                        {
+                            return !AppointmentServiceProxy.Current.Appointments.Values
+                            .Any(appt =>
+                                appt.Physician?.Id == p?.Id
+                                && Model.StartTime < appt.EndTime
+                                && Model.EndTime > appt.StartTime
+                            );
+                        })
                         .OrderBy(p => (SelectedPhysician != null && p?.Id == SelectedPhysician?.Model?.Id ? 0 : 1))
                         .ThenByDescending(p => p?.Name)
                         .Select(p =>
@@ -448,7 +522,9 @@ namespace Maui.TheraOffice.ViewModels
                     Model.StartTime = value;
                     Model.EndTime = value;
                 }
-                NotifyPropertyChanged();        
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Patients));
+                NotifyPropertyChanged(nameof(Physicians));
             }
         }
 
@@ -465,6 +541,8 @@ namespace Maui.TheraOffice.ViewModels
                     Model.StartTime = Model.StartTime.Date + value;
                 }
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Patients));
+                NotifyPropertyChanged(nameof(Physicians));
             }
         }
         public TimeSpan EndTime
@@ -480,6 +558,8 @@ namespace Maui.TheraOffice.ViewModels
                     Model.EndTime = Model.EndTime.Date + value;
                 }
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Patients));
+                NotifyPropertyChanged(nameof(Physicians));
             }
         }
 
@@ -512,7 +592,8 @@ namespace Maui.TheraOffice.ViewModels
         private void SetUpCommands()
         {
             DeleteCommand = new Command(DoDelete);
-            EditCommand = new Command((p) => DoEdit(p as AppointmentViewModel));
+            EditCommand = new Command((appt) => DoEdit(appt as AppointmentViewModel));
+            CloseCommand = new Command((appt) => DoClose(appt as AppointmentViewModel));
         }
         private void DoDelete()
         {
@@ -532,8 +613,18 @@ namespace Maui.TheraOffice.ViewModels
             var selectedAppointmentId = avm?.Model?.Id ?? 0;
             Shell.Current.GoToAsync($"//AppointmentView?AppointmentId={selectedAppointmentId}");
         }
+        private void DoClose(AppointmentViewModel? avm)
+        {
+            if (avm == null)
+            {
+                return;
+            }
+            var selectedAppointmentId = avm?.Model?.Id ?? 0;
+            Shell.Current.GoToAsync($"//AppointmentCloseView?AppointmentId={selectedAppointmentId}");
+        }
         public ICommand? DeleteCommand { get; set; }
         public ICommand? EditCommand { get; set; }
+        public ICommand? CloseCommand { get; set; }
         public Appointment? Model { get; set; }
         public Color DisplayBackgroundColor
         {

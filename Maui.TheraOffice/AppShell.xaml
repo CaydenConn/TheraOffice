@@ -24,9 +24,9 @@
     Route="PhysicianMainView" />
     
     <ShellContent
-        Title="Appointments"
-        ContentTemplate="{DataTemplate views:AppointmentMainView}"
-        Route="AppointmentMainView" />
+    Title="Appointments"
+    ContentTemplate="{DataTemplate views:AppointmentMainView}"
+    Route="AppointmentMainView" />
 
     <ShellContent
     Title="Patients"
@@ -42,4 +42,9 @@
     Title="Appointments"
     ContentTemplate="{DataTemplate views:AppointmentView}"
     Route="AppointmentView" />
+
+    <ShellContent
+    Title="Appointments"
+    ContentTemplate="{DataTemplate views:AppointmentCloseView}"
+    Route="AppointmentCloseView" />
 </Shell>

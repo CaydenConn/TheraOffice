@@ -54,9 +54,11 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Text="Edit" Grid.Column="0" Command="{Binding EditCommand}" CommandParameter="{Binding}" />
-                                        <Button Text="Delete" Grid.Column="1" Clicked="InlineEditClicked" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Close" Grid.Column="0" Command="{Binding CloseCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Edit" Grid.Column="1" Command="{Binding EditCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Delete" Grid.Column="2" Clicked="InlineEditClicked" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
                                     </Grid>
 
                                 </Grid>
