@@ -38,10 +38,10 @@
             <!-- Physician LIST -->
             <Grid Grid.Row="2">
                 <ListView
-        ItemsSource="{Binding Physicians}"
-        SelectedItem="{Binding SelectedPhysician}"
-        HasUnevenRows="False"
-        >
+                ItemsSource="{Binding Physicians}"
+                SelectedItem="{Binding SelectedPhysician}"
+                HasUnevenRows="False"
+                >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -76,7 +76,7 @@
                 <Grid 
             Grid.Row="1"
             IsVisible="{Binding IsInlineCardVisible}"
-        >
+            >
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>

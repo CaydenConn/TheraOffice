@@ -7,8 +7,8 @@
         public DateTime Birthday { get; set; } = DateTime.Today;
         public string? Race { get; set; }
         public string? Gender { get; set; }
-        public List<string?>? Diagnoses { get; set; }
-        public List<string?>? Perscriptions { get; set; }
+        public string? Diagnoses { get; set; }
+        public string? Perscriptions { get; set; }
         public int Id { get; set; }
 
         public override string ToString()

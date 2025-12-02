@@ -2,6 +2,7 @@
 using Library.TheraOffice.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -41,6 +42,15 @@ namespace Maui.TheraOffice.ViewModels
             if (Model?.Id > 0)
             {
                 PatientServiceProxy.Current.Delete(Model.Id);
+                var appointmentsToDelete = AppointmentServiceProxy.Current.Appointments.Values
+                    .Where(appt => appt.Patient?.Id == Model?.Id)
+                    .Select(appt => appt.Id)
+                    .ToList();
+
+                foreach (var apptId in appointmentsToDelete)
+                {
+                    AppointmentServiceProxy.Current.Delete(apptId);
+                }
                 Shell.Current.GoToAsync("//PatientMainView");
             }
         }
@@ -57,10 +67,13 @@ namespace Maui.TheraOffice.ViewModels
         public ICommand? DeleteCommand { get; set; }
         public ICommand? EditCommand { get; set; }
         public Patient? Model { get; set; }
+        private Color? displayBackgroundColor = default;
         public Color DisplayBackgroundColor
         {
             get
             {
+                if (displayBackgroundColor != default) { return displayBackgroundColor; }
+
                 if (Model == null) { return Colors.Transparent; }
 
                 int age = DateTime.Today.Year - Model.Birthday.Year;
@@ -70,6 +83,13 @@ namespace Maui.TheraOffice.ViewModels
                 }
 
                 return age < 18 ? Colors.LightBlue : Colors.LightGoldenrodYellow;
+            }
+            set
+            {
+                if (displayBackgroundColor != value)
+                {
+                    displayBackgroundColor = value;
+                }
             }
         }
     }

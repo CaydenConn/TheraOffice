@@ -45,7 +45,7 @@ namespace Library.TheraOffice.Services
             }
             return null;
         }
-        public Appointment? CreateAppointment(Appointment? appt)
+        public Appointment? AddOrUpdate(Appointment? appt)
         {
             // Check if 'appt' parameter exists
             if (appt == null) return null;
@@ -72,18 +72,6 @@ namespace Library.TheraOffice.Services
                 appt.Id = maxId;
             }
 
-            // Checks to see if Patient and Physician in the Appointment Exists
-            if (!PatientServiceProxy.Current.Patients.ContainsKey(appt.PatientId))
-            {
-                Console.WriteLine($"Patient with Id: {appt.PatientId} does not exist");
-                return null;
-            }
-            if (!PhysicianServiceProxy.Current.Physicians.ContainsKey(appt.PhysicianId))
-            {
-                Console.WriteLine($"Physician with Id: {appt.PhysicianId} does not exist");
-                return null;
-            }
-
             // Checks to see if the Date + Time fall within Business Hours
             if (appt.StartTime.Hour < 8 || (appt.EndTime.Hour > 17 && appt.EndTime.Minute >= 0) || appt.StartTime >= appt.EndTime)
             {
@@ -104,12 +92,22 @@ namespace Library.TheraOffice.Services
             }
 
             // Checks to see if there is already an appointment at that given Date + Time
-            bool overlap = appointments.Values.Any(existing => existing.PhysicianId == appt.PhysicianId
-                                            && existing.StartTime < appt.EndTime
-                                            && appt.StartTime < existing.EndTime);
+            bool overlap = appointments.Values.Any(existing => (existing?.Physician?.Id == appt?.Physician?.Id || existing?.Patient?.Id == appt?.Patient?.Id)
+                                            && existing?.StartTime < appt?.EndTime
+                                            && appt?.StartTime < existing?.EndTime);
             if (overlap)
             {
                 Console.WriteLine("Physician is booked at this time");
+                return null;
+            }
+
+            // Checks to see if there is already a room booked for this appointment
+            bool roomOverlap = appointments.Values.Any(existing => existing?.RoomId == appt?.RoomId
+                                            && existing?.StartTime < appt?.EndTime
+                                            && appt?.StartTime < existing?.EndTime);
+            if (roomOverlap)
+            {
+                Console.WriteLine("Room is booked at this time");
                 return null;
             }
 
@@ -125,7 +123,7 @@ namespace Library.TheraOffice.Services
             return appt;
         }
 
-        public Appointment? DeleteAppointment(int id)
+        public Appointment? Delete(int id)
         {
             // If the Appointment id does not exist return null
             if (!appointments.ContainsKey(id)) { return null; }
@@ -141,7 +139,7 @@ namespace Library.TheraOffice.Services
             foreach (var appt in appointments.Values)
             {
                 Console.WriteLine("Appointments");
-                Console.WriteLine($"{appt.Id}. Patient: {PatientServiceProxy.Current.Patients[appt.PatientId].Name}({PatientServiceProxy.Current.Patients[appt.PatientId].Id}), Physician: {PhysicianServiceProxy.Current.Physicians[appt.PhysicianId].Name}({PhysicianServiceProxy.Current.Physicians[appt.PhysicianId].Id}), Time: {appt.StartTime.TimeOfDay}-{appt.EndTime.TimeOfDay} on {appt.StartTime.Date}");
+                Console.WriteLine(appt);
             }
             return true;
         }

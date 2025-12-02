@@ -91,15 +91,6 @@ namespace Library.TheraOffice.Services
             if (!patients.ContainsKey(id)) { return null; }
             var deletedPatient = patients[id];
             patients.Remove(id);
-            var appointmentsToDelete = AppointmentServiceProxy.Current.Appointments.Values.
-                                                    Where(appt => appt.PatientId == id).
-                                                    Select(appt => appt.Id).
-                                                    ToList();
-
-            foreach (var apptId in appointmentsToDelete)
-            {
-                AppointmentServiceProxy.Current.Appointments.Remove(apptId);
-            }
 
             return deletedPatient;
         }

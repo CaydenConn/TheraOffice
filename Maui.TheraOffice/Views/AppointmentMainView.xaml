@@ -3,9 +3,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.TheraOffice.Views.AppointmentMainView"
              Title="AppointmentMainView"
-             >
+             NavigatedTo="ContentPage_NavigatedTo">
     <VerticalStackLayout>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!-- HEADER -->
+            <Grid Grid.Row="0">
+                <Label
+                Text="Appointments"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                />
+            </Grid>
+            <!-- SEARCH BAR -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.735*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="{Binding SortSearchType}" Clicked="SortTypeClicked"/>
+                <Button Grid.Column="1" Text="{Binding SortSearchIcon}" Clicked="SortSearchClicked"/>
+                <Entry Grid.Column="2" Text="{Binding Query}"/>
+                <Button Text="Search" Grid.Column="3" Clicked="SearchClicked"/>
+            </Grid>
+            <!-- Appointment LIST -->
+            <Grid Grid.Row="2">
+                <ListView
+                ItemsSource="{Binding Appointments}"
+                SelectedItem="{Binding SelectedAppointment}"
+                HasUnevenRows="False"
+                >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4.35*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Model.Display}" Background="{Binding DisplayBackgroundColor}"  Grid.Column="0"/>
+                                    <Grid Grid.Column="1" Background="{Binding DisplayBackgroundColor}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Text="Close" Grid.Column="0" Command="{Binding CloseAppointmentCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Edit" Grid.Column="1" Command="{Binding EditCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Delete" Grid.Column="2" Clicked="InlineEditClicked" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
+                                    </Grid>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <!-- BUTTON BAR -->
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Add" Clicked="AddClicked" />
+                    <Button Grid.Column="1" Text="Edit" Clicked="EditClicked" />
+                    <Button Grid.Column="2" Text="Delete" Clicked="DeleteClicked" />
+                </Grid>
+            </Grid>
+        </Grid>
         <Button Text="Back to Menu" Clicked="BackClicked"/>
     </VerticalStackLayout>
 </ContentPage>

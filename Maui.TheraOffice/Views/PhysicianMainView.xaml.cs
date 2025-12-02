@@ -28,7 +28,7 @@ public partial class PhysicianMainView : ContentPage
     }
     private void InlineAddClicked(object sender, EventArgs e)
     {
-        (BindingContext as PhysicianMainViewModel)?.AddInlineBlog();
+        (BindingContext as PhysicianMainViewModel)?.AddInlinePhysician();
     }
 
     private void ExpandCardClicked(object sender, EventArgs e)

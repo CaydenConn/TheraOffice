@@ -89,7 +89,7 @@ namespace CLI.TheraOffice
                                         appt.EndTime = endTime;
                                     }
 
-                                    AppointmentServiceProxy.Current.CreateAppointment(appt);
+                                    AppointmentServiceProxy.Current.AddOrUpdate(appt);
                                     break;
                                 default:
                                     break;
@@ -221,7 +221,7 @@ namespace CLI.TheraOffice
                                                 Console.WriteLine("End Time: ");
                                                 apptToUpdate.EndTime = DateTime.Parse(Console.ReadLine() ?? "1/1/0001");
 
-                                                AppointmentServiceProxy.Current.CreateAppointment(apptToUpdate);
+                                                AppointmentServiceProxy.Current.AddOrUpdate(apptToUpdate);
                                             }
                                         }
                                             break;
@@ -256,7 +256,7 @@ namespace CLI.TheraOffice
                                     Console.WriteLine("Select Appointment to Delete(Id): ");
                                     if (int.TryParse(Console.ReadLine() ?? "-1", out int apptId))
                                     {
-                                        AppointmentServiceProxy.Current.DeleteAppointment(apptId);
+                                        AppointmentServiceProxy.Current.Delete(apptId);
                                     }
                                     break;
                                 default:

@@ -13,7 +13,12 @@
         <Entry Text="{Binding Model.Gender}"/>
         <Label Text="Patient's Date of Birth"/>
         <DatePicker Date="{Binding Model.Birthday}"/>
-        
+
+        <Label Text="Diagnoses"/>
+        <Entry Text="{Binding Model.Diagnoses}"/>
+        <Label Text="Treatments"/>
+        <Entry Text="{Binding Model.Perscriptions}"/>
+
         <Button Text="Ok" Clicked="OkClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>
     </VerticalStackLayout>

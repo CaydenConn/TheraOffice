@@ -185,9 +185,18 @@ namespace Maui.TheraOffice.ViewModels
                 return;
             }
             PatientServiceProxy.Current.Delete(SelectedPatient?.Model?.Id ?? 0);
+            var appointmentsToDelete = AppointmentServiceProxy.Current.Appointments.Values
+                .Where(appt => appt.Patient?.Id == SelectedPatient?.Model?.Id)
+                .Select(appt => appt.Id)
+                .ToList();
+
+            foreach (var apptId in appointmentsToDelete)
+            {
+                AppointmentServiceProxy.Current.Delete(apptId);
+            }
             Refresh();
         }
-        public void AddInlineBlog()
+        public void AddInlinePatient()
         {
             PatientServiceProxy.Current.AddOrUpdate(InlinePatient?.Model);
             NotifyPropertyChanged(nameof(Patients));
