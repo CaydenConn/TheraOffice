@@ -15,9 +15,9 @@
         <DatePicker Date="{Binding Model.Birthday}"/>
 
         <Label Text="Diagnoses"/>
-        <Label Text="{Binding Model.Diagnoses}"/>
+        <Entry Text="{Binding Model.Diagnoses}"/>
         <Label Text="Treatments"/>
-        <Label Text="{Binding Model.Perscriptions}"/>
+        <Entry Text="{Binding Model.Perscriptions}"/>
 
         <Button Text="Ok" Clicked="OkClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>

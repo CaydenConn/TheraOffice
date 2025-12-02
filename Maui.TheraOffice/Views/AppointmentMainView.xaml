@@ -46,7 +46,7 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="4.35*"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Model.Display}" Background="{Binding DisplayBackgroundColor}"  Grid.Column="0"/>
@@ -56,7 +56,7 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Text="Close" Grid.Column="0" Command="{Binding CloseCommand}" CommandParameter="{Binding}" />
+                                        <Button Text="Close" Grid.Column="0" Command="{Binding CloseAppointmentCommand}" CommandParameter="{Binding}" />
                                         <Button Text="Edit" Grid.Column="1" Command="{Binding EditCommand}" CommandParameter="{Binding}" />
                                         <Button Text="Delete" Grid.Column="2" Clicked="InlineEditClicked" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" />
                                     </Grid>

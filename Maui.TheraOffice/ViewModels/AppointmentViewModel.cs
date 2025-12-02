@@ -1,5 +1,6 @@
 ﻿using Library.TheraOffice.Models;
 using Library.TheraOffice.Services;
+using Maui.TheraOffice.WinUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -563,37 +564,26 @@ namespace Maui.TheraOffice.ViewModels
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // *******
+        // * END *
+        // *******
 
         public void AddOrUpdate()
         {
+            // Checks to see if Patient and Physician in the Appointment Exists
+            if (!PatientServiceProxy.Current.Patients.ContainsKey(Model.Patient.Id)
+                || !PhysicianServiceProxy.Current.Physicians.ContainsKey(Model.Physician.Id))
+            {
+                return;
+            }
+
             AppointmentServiceProxy.Current.AddOrUpdate(Model);
         }
         private void SetUpCommands()
         {
             DeleteCommand = new Command(DoDelete);
             EditCommand = new Command((appt) => DoEdit(appt as AppointmentViewModel));
-            CloseCommand = new Command((appt) => DoClose(appt as AppointmentViewModel));
+            CloseAppointmentCommand = new Command((appt) => DoCloseAppointment(appt as AppointmentViewModel));
         }
         private void DoDelete()
         {
@@ -613,7 +603,7 @@ namespace Maui.TheraOffice.ViewModels
             var selectedAppointmentId = avm?.Model?.Id ?? 0;
             Shell.Current.GoToAsync($"//AppointmentView?AppointmentId={selectedAppointmentId}");
         }
-        private void DoClose(AppointmentViewModel? avm)
+        private void DoCloseAppointment(AppointmentViewModel? avm)
         {
             if (avm == null)
             {
@@ -624,7 +614,7 @@ namespace Maui.TheraOffice.ViewModels
         }
         public ICommand? DeleteCommand { get; set; }
         public ICommand? EditCommand { get; set; }
-        public ICommand? CloseCommand { get; set; }
+        public ICommand? CloseAppointmentCommand { get; set; }
         public Appointment? Model { get; set; }
         public Color DisplayBackgroundColor
         {

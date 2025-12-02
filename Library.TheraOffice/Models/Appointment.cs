@@ -15,17 +15,17 @@ namespace Library.TheraOffice.Models
         public int PhysicianId { get; set; }
         public Physician? Physician { get; set; }
         public DateTime StartTime { get; set; } = DateTime.Today;
-        public DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; } = DateTime.Today;
         public string? RoomId { get; set; }
 
         public override string ToString()
         {
             if (Patient == null || Physician == null)
             {
-                return $"{Id}. {StartTime:MM/dd/yy} {StartTime:hh\\:mm} - {EndTime:hh\\:mm}: {PatientId} with {PhysicianId}";
+                return $"{Id}. {StartTime:MM/dd/yy} {StartTime:hh\\:mm tt} - {EndTime:hh\\:mm tt}: {PatientId} with {PhysicianId} Room: {RoomId}";
             }
 
-            return $"{Id}. {StartTime:MM/dd/yy} {StartTime:hh\\:mm} - {EndTime:hh\\:mm}: {Patient.Name}({Patient.Id}) with {Physician.Name}({Physician.Id})";
+            return $"{Id}. {StartTime:MM/dd/yy} {StartTime:hh\\:mm tt} - {EndTime:hh\\:mm tt}: {Patient.Name}({Patient.Id}) with {Physician.Name}({Physician.Id}) Room: {RoomId}";
         }
         public string Display
         {

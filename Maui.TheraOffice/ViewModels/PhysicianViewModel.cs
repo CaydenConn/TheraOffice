@@ -41,6 +41,15 @@ namespace Maui.TheraOffice.ViewModels
             if (Model?.Id > 0)
             {
                 PhysicianServiceProxy.Current.Delete(Model.Id);
+                var appointmentsToDelete = AppointmentServiceProxy.Current.Appointments.Values
+                    .Where(appt => appt.Physician?.Id == Model?.Id)
+                    .Select(appt => appt.Id)
+                    .ToList();
+
+                foreach (var apptId in appointmentsToDelete)
+                {
+                    AppointmentServiceProxy.Current.Delete(apptId);
+                }
                 Shell.Current.GoToAsync("//PhysicianMainView");
             }
         }

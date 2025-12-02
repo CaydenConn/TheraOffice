@@ -5,18 +5,64 @@
              Title="AppointmentCloseView"
              NavigatedTo="ContentPage_NavigatedTo">
     <VerticalStackLayout>
-        <Label Text="Patient's Name: " />
-        <Label Text="{Binding Model.Patient.Name}" />
-        <Label Text="Physician's Name: " />
-        <Label Text="{Binding Model.Physician.Name}" />
-        <Label Text="Date and Time: " />
-        <Label Text="{Binding Model.StartTime, StringFormat='{0:MM/dd/yy hh:mm}'}" />
-
-        <Label Text="Diagnoses: " />
-        <Entry Text="{Binding Model.Patient.Diagnoses}" />
-        <Label Text="Treatments: " />
-        <Entry Text="{Binding Model.Patient.Perscriptions}" />
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Patient's Name: " />
+                <Label Grid.Row="1" Text="{Binding Model.Patient.Name}" FontAttributes="Bold"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Physician's Name: " />
+                <Label Grid.Row="1" Text="{Binding Model.Physician.Name}" FontAttributes="Bold"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Date and Time: " />
+                <Label Grid.Row="1" Text="{Binding Model.StartTime, StringFormat='{0:MM/dd/yy hh:mm tt}'}" FontAttributes="Bold"/>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Room Id: " />
+                <Label Grid.Row="1" Text="{Binding Model.RoomId}" FontAttributes="Bold"/>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Diagnoses: " />
+                <Entry Grid.Row="1" Text="{Binding Model.Patient.Diagnoses}"/>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Treatments and Costs: " />
+                <Entry Grid.Row="1" Text="{Binding Model.Patient.Perscriptions}"/>
+            </Grid>
+        </Grid>
 
         <Button Text="Ok" Clicked="OkClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>
